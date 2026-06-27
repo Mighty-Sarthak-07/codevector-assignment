@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-// Define the backend API URL
-const API_URL = 'http://localhost:3001';
+// Define the backend API URL (reads from Vite env variable, cleans trailing slash)
+const rawUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+const API_URL = rawUrl.endsWith('/') ? rawUrl.slice(0, -1) : rawUrl;
 
 export const api = axios.create({
   baseURL: API_URL,
