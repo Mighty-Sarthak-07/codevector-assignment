@@ -1,75 +1,30 @@
-# React + TypeScript + Vite
+# Product Catalog Web Client (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React web application built with TypeScript, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Real-Time API Health Status**: Navbar health dot indicator that automatically polls the backend server `/health` status.
+* **Category Filtering**: Dropdown filter selector that resets pagination and loads products by category.
+* **Cursor Pagination**: Clean cursor-based catalog fetching with a "Load More" button that resolves `nextCursor`.
+* **Formatted Pricing**: Formats product pricing as Indian Rupees (INR `₹`) formatted by local convention (`en-IN`).
+* **Error & Loader States**: Handles connection errors with manual retry triggers, full-screen loaders, and inline pagination warning blocks.
 
-## React Compiler
+## Environment Configurations
+Configure the backend connection URL in your `.env` file:
+```env
+VITE_BACKEND_URL=https://codevector-assignment-1-0fq7.onrender.com/
+```
+*(Only environment variables prefixed with `VITE_` are exposed to the client-side bundle.)*
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+## Development
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+## Production Build
+```bash
+npm run build
 ```
+The compiled files will be located in the `dist` directory.
