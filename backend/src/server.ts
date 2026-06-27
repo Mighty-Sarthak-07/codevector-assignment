@@ -1,4 +1,5 @@
 import "dotenv/config";
+import path from "node:path";
 import cors from "cors";
 import express from "express";
 import type { NextFunction, Request, Response } from "express";
@@ -14,6 +15,10 @@ app.use(cors());
 app.use(express.json());
 
 // API Routes
+app.get("/", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "src/public/index.html"));
+});
+
 app.get("/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
